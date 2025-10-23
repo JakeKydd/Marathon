@@ -171,6 +171,12 @@ jobs:
   collect-sarif-results: # Use github/codeql-action/upload-sarif action instead (when either public repo or CodeQL enabled in enterprise commercial repo)
     name: Collect Results
     runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
     needs:
       - sast-scans
       - semgrep-scan
